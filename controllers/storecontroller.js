@@ -48,7 +48,6 @@ exports.getFavouraiteList = (req, res, next) => {
 
 exports.getHomeDetails = (req, res, next) => {
   const homeId = req.params.homeId;
-  console.log("at home detail page", homeId);
   Home.findById(homeId, (home) => {
     console.log("home Found", home);
     res.render("store/home-detail", {
@@ -60,7 +59,6 @@ exports.getHomeDetails = (req, res, next) => {
 };
 
 exports.postAddToFavoraite = (req, res, next) => {
-  console.log("come to the", req.body);
   Favourites.addToFavourite(req.body.id, (error) => {
     if (error) {
       console.log("Error while marking favourites", error);

@@ -7,7 +7,17 @@ exports.getAddHome = (req, res, next) => {
   });
 };
 
-exports.getHostHomes = (req, res, next) => {
+exports.getEditHome = (req, res, next) => {
+  const homeId = req.params.homeId;
+  const editing = req.query.editing === "true";
+  res.render("host/edit-home", {
+    pageTitle: "Edit Your Home",
+    currentPage: "hostHome",
+    editing: editing,
+  });
+};
+
+exports.getHostHome = (req, res, next) => {
   const registeredHomes = Home.fetchAll((homes) => {
     res.render("host/host-home-list", {
       registeredHomes: homes,
