@@ -53,7 +53,7 @@ exports.postEditHome = (req, res, next) => {
 
 exports.postDeleteHome = (req, res, next) => {
   const homeId = req.params.homeId;
-  console.log("came to", homeId);
+
   Home.deleteById(homeId, (error) => {
     if (error) {
       console.log(error in deleting, error);

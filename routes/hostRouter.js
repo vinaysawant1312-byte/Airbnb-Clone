@@ -2,6 +2,7 @@ const express = require("express");
 const path = require("path");
 
 const getControllers = require("../controllers/hostController");
+
 const rootDir = require("../utils/pathUtils");
 const hostRouter = express.Router();
 
