@@ -32,7 +32,16 @@ module.exports = class Home {
 
   static fetchAll(callback) {
     fs.readFile(filePath, (err, data) => {
-      callback(!err ? JSON.parse(data) : []);
+      if (err) {
+        callback([]);
+        return;
+      }
+      try {
+        const parsed = JSON.parse(data);
+        callback(Array.isArray(parsed) ? parsed : [parsed]);
+      } catch (e) {
+        callback([]);
+      }
     });
   }
 
@@ -40,6 +49,13 @@ module.exports = class Home {
     Home.fetchAll((homes) => {
       const homeFound = homes.find((h) => h.id === homeId);
       callback(homeFound);
+    });
+  }
+
+  static deleteById(homeId, callback) {
+    Home.fetchAll((homes) => {
+      const updated = homes.filter((h) => h.id !== homeId);
+      fs.writeFile(filePath, JSON.stringify(updated), callback);
     });
   }
 };
